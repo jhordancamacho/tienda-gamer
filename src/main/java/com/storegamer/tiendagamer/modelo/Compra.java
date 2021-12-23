@@ -1,13 +1,10 @@
-package com.storegamer.tiendagamer.persistance.entity;
+package com.storegamer.tiendagamer.modelo;
 
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -18,6 +15,7 @@ import java.time.LocalDateTime;
 public class Compra {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_compra")
     private Integer idCompra;
 

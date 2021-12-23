@@ -1,16 +1,14 @@
-package com.storegamer.tiendagamer.persistance.entity;
+package com.storegamer.tiendagamer.modelo;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TECNOLOGIAS")
 public class Tecnologia {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_tecnologia")
     private Integer idTecnologia;
 

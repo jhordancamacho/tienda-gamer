@@ -1,4 +1,4 @@
-package com.storegamer.tiendagamer.persistance.entity;
+package com.storegamer.tiendagamer.modelo;
 
 
 import lombok.Getter;

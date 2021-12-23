@@ -1,26 +1,30 @@
-package com.storegamer.tiendagamer.persistance.entity;
+package com.storegamer.tiendagamer.modelo;
 
 import lombok.Getter;
 import lombok.Setter;
+import javax.validation.constraints.Email;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.math.BigInteger;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "USUARIOS")
+@Table(name = "usuarios")
 public class Usuario {
+
 
     @Id
     @Column(name = "id_usuario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUsuario;
 
     private String nombre;
     private String apellido;
-    private Integer celular;
+    private BigInteger celular;
     private String direccion;
+
+    @Email
     private String correo;
+
 }
