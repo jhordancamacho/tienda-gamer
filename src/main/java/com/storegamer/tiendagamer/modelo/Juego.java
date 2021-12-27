@@ -1,5 +1,6 @@
 package com.storegamer.tiendagamer.modelo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,13 +14,11 @@ import java.time.LocalDateTime;
 public class Juego {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_juego")
     private Integer idJuegos;
 
     private String nombre;
-
-    private LocalDateTime ano;
+    private Integer ano;
     private String protagonistas;
     private String director;
     @Column(name="id_tecnologia")

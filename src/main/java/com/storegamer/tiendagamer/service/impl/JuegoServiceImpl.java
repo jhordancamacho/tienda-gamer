@@ -6,7 +6,9 @@ import com.storegamer.tiendagamer.modelo.Juego;
 import com.storegamer.tiendagamer.service.JuegoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class JuegoServiceImpl extends GenericServiceImpl<Juego,Integer> implements JuegoService {
 
     @Autowired
