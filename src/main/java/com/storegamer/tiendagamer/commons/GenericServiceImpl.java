@@ -4,9 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public abstract class GenericServiceImpl<T, ID extends Serializable> implements GenericService<T, ID> {
@@ -36,6 +34,23 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
         List<T> returnList = new ArrayList<>();
         getDao().findAll().forEach(obj -> returnList.add(obj));
         return returnList;
+    }
+    @Override
+    public List<T> getAllById(ID id) {
+        Optional<T> obj = getDao().findById(id);
+        if(obj.isPresent()) {
+        List<ID> idList=Arrays.asList(id);
+        return (List<T>)  getDao().findAllById(idList);
+        }
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> msg(boolean status, String msg) {
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("msg", msg);
+        respuesta.put("status", status);
+        return respuesta;
     }
 
     public abstract CrudRepository<T, ID> getDao();

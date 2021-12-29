@@ -18,4 +18,6 @@ public class AlquilerServiceImpl extends GenericServiceImpl<Alquiler, Integer> i
     public CrudRepository<Alquiler, Integer> getDao(){
         return alquilerDao;
     }
+    
+
 }

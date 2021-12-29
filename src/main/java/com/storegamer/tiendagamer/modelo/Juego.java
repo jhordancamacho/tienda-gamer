@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,11 +18,22 @@ public class Juego {
     @Column(name = "id_juego")
     private Integer idJuegos;
 
+    @NotNull
     private String nombre;
+
+    @NotNull
     private Integer ano;
+
+    @NotNull
     private String protagonistas;
+
+    @NotNull
     private String director;
+
     @Column(name="id_tecnologia")
+    @NotNull
     private Integer idTecnologia;
+
+    @NotNull
     private Integer precio;
 }
