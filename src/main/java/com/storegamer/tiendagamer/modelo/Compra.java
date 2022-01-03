@@ -15,9 +15,8 @@ import java.time.LocalDateTime;
 public class Compra {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_compra")
-    private Integer idCompra;
+    private int idCompra;
 
     @Column(name="id_usuario")
     private Integer idUsuario;
@@ -26,6 +25,9 @@ public class Compra {
 
     @Column(name="medio_pago")
     private Character medioPago;
+
+    @Column(name = "valor_total")
+    private Integer valorTotal;
 
     private Character estado;
 }

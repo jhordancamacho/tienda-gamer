@@ -1,8 +1,11 @@
 package com.storegamer.tiendagamer.commons;
 
+import com.storegamer.tiendagamer.modelo.Alquiler;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface GenericService <T,ID extends Serializable>{
     T save(T entity);
@@ -13,7 +16,7 @@ public interface GenericService <T,ID extends Serializable>{
 
     List<T> getAll();
 
-    List<T> getAllById(ID id);
 
     Map<String, Object> msg(boolean status, String msg);
+
 }

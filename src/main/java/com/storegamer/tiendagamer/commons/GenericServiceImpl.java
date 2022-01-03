@@ -35,15 +35,7 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
         getDao().findAll().forEach(obj -> returnList.add(obj));
         return returnList;
     }
-    @Override
-    public List<T> getAllById(ID id) {
-        Optional<T> obj = getDao().findById(id);
-        if(obj.isPresent()) {
-        List<ID> idList=Arrays.asList(id);
-        return (List<T>)  getDao().findAllById(idList);
-        }
-        return null;
-    }
+
 
     @Override
     public Map<String, Object> msg(boolean status, String msg) {

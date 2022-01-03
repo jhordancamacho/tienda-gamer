@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,11 +56,22 @@ public class AlquilerController {
         //se envia el estado y la prueba de compra
     return alquilerService.msg(true,respuesta.toString());
     }
-        return alquilerService.msg(true,"si");
+        return alquilerService.msg(false,"datos incorrectos");
     }
 
     @GetMapping("/alquiler/{id}")
     public List<Alquiler> getAll(@PathVariable Integer id) {
-        return alquilerService.getAllById(id);
+        List<Alquiler> returnList = new ArrayList<>();
+        List<Compra> compraList=compraService.getAll();
+        List<Alquiler> alquilerList=alquilerService.getAll();
+        for (int i=0;i<alquilerList.size();i++){
+            for (int e=0;e<compraList.size();e++){
+                if(alquilerList.get(i).getId().getIdCompra().equals(compraList.get(e).getIdCompra())
+                        && compraList.get(i).getIdUsuario().equals(id)){
+                    returnList.add(alquilerList.get(i));
+                }
+            }
+        }
+        return returnList;
     }
 }
