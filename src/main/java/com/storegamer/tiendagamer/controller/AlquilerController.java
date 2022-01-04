@@ -38,26 +38,6 @@ public class AlquilerController {
         return alquilerService.getAll();
     }
 
-    @PostMapping("/insertar")
-    public Map<String,Object> save(@RequestBody Alquiler alquiler){
-    if(juegoService.get(alquiler.getId().getIdJuego())!=null && compraService.get(alquiler.getId().getIdCompra())!=null){
-    alquilerService.save(alquiler);
-        Juego juego=juegoService.get(alquiler.getId().getIdJuego());
-        Compra compra=compraService.get(alquiler.getId().getIdCompra());
-        Usuario usuario=usuarioService.get(compra.getIdUsuario());
-        //Creando el objeto para la prueba de compra
-        Map<String, Object> respuesta = new HashMap<>();
-        respuesta.put("idCompra", compra.getIdCompra());
-        respuesta.put("userName", usuario.getNombre()+usuario.getApellido());
-        respuesta.put("idJuego", juego.getIdJuegos());
-        respuesta.put("juegoName", juego.getNombre());
-        respuesta.put("fechaInicio",alquiler.getFechaInicio());
-        respuesta.put("fechaFin",alquiler.getFechaEntrega());
-        //se envia el estado y la prueba de compra
-    return alquilerService.msg(true,respuesta.toString());
-    }
-        return alquilerService.msg(false,"datos incorrectos");
-    }
 
     @GetMapping("/alquiler/{id}")
     public List<Alquiler> getAll(@PathVariable Integer id) {

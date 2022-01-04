@@ -1,8 +1,12 @@
 package com.storegamer.tiendagamer.controller;
 
 
+import com.storegamer.tiendagamer.modelo.Alquiler;
+import com.storegamer.tiendagamer.modelo.AlquilerPK;
 import com.storegamer.tiendagamer.modelo.Compra;
+import com.storegamer.tiendagamer.service.AlquilerService;
 import com.storegamer.tiendagamer.service.CompraService;
+import com.storegamer.tiendagamer.service.JuegoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +24,33 @@ public class CompraController {
     @Autowired
     CompraService compraService;
 
-    @PostMapping("/agregar")
-    public Map<String, Object> save(@RequestBody Compra compra) {
-        if (compra.getIdUsuario() != null && compra.getEstado() != null && compra.getValorTotal() != null && compra.getMedioPago() != null) {
+    @Autowired
+    JuegoService juegoService;
+
+    @Autowired
+    AlquilerService alquilerService;
+
+    @PostMapping("/agregar/{idJuego}")
+    public Map<String, Object> save(@RequestBody Compra compra,@PathVariable Integer idJuego) {
+        if (compra.getIdUsuario() != null && compra.getEstado() != null && compra.getNumeroSemanas()!=null && compra.getMedioPago() != null) {
             LocalDateTime d = LocalDateTime.now();
-            int idCompra = (int) (Math.random() * 9000 + 1000);
+            //String fechaActual = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()).toString();
+            int idCompra = (int) (Math.random() * 90000 + 10000);
+            int valorTotal= juegoService.get(idJuego).getPrecio() *compra.getNumeroSemanas();
+            compra.setValorTotal(valorTotal);
             compra.setIdCompra(idCompra);
-            System.out.println(d.toString());
             compra.setFecha(d);
             compraService.save(compra);
+
+            Alquiler alquiler=new Alquiler();
+            AlquilerPK alquilerPK=new AlquilerPK();
+            alquilerPK.setIdCompra(idCompra);
+            alquilerPK.setIdJuego(idJuego);
+            alquiler.setId(alquilerPK);
+            alquiler.setFechaInicio(LocalDateTime.now());
+            alquiler.setFechaEntrega(compraService.sumarFecha(compra.getNumeroSemanas()));
+            alquilerService.save(alquiler);
+
             return compraService.msg(true, "Compra exitosa");
         }
         return compraService.msg(false, "Datos incorrectos");

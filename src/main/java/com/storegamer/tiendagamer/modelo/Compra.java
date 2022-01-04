@@ -26,6 +26,9 @@ public class Compra {
     @Column(name="medio_pago")
     private Character medioPago;
 
+    @Column(name = "numero_semanas")
+    private Integer numeroSemanas;
+
     @Column(name = "valor_total")
     private Integer valorTotal;
 
