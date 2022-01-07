@@ -5,6 +5,7 @@ import lombok.Setter;
 import javax.validation.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 
 @Getter
@@ -19,12 +20,16 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUsuario;
 
+    @NotNull
     private String nombre;
+    @NotNull
     private String apellido;
+    @NotNull
     private BigInteger celular;
+    @NotNull
     private String direccion;
 
-    @Email
+    @Email @NotNull
     private String correo;
 
 }

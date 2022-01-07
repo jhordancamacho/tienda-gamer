@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 
@@ -20,9 +21,9 @@ public class Alquiler {
     @EmbeddedId
     private AlquilerPK id;
 
-    @Column(name="fecha_inicio")
+    @Column(name="fecha_inicio") @NotNull
     private LocalDateTime fechaInicio;
 
-    @Column(name="fecha_entrega")
+    @Column(name="fecha_entrega") @NotNull
     private LocalDateTime fechaEntrega;
 }

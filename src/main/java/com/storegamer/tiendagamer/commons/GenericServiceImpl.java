@@ -46,5 +46,4 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
     }
 
     public abstract CrudRepository<T, ID> getDao();
-
 }
